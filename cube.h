@@ -7,9 +7,9 @@
 #include <math.h>
 
 #define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 62
+#define SCREEN_HEIGHT 128
 
-#define FOV 50
+#define FOV 50.0f
 
 #define HEIGHT 5
 #define WIDTH 5
