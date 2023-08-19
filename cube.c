@@ -5,9 +5,9 @@ void render_frame(void) {
     char out_buffer[SCREEN_HEIGHT][SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT - 1][0 ... SCREEN_WIDTH - 1] = ' ' };
 
     // X coordinate
-    for (int x = -WIDTH; x < WIDTH; x++) {
+    for (float x = -WIDTH; x < WIDTH; x += 0.05) {
         // Y coordinate
-        for (int y = -HEIGHT; y < HEIGHT + 1; y++) {
+        for (float y = -HEIGHT; y < HEIGHT + 1; y += 0.05) {
             // distance from the screen
             float z = 30.0f;
             float z_inv = 1.0f / z;
