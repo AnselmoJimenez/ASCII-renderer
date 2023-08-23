@@ -18,31 +18,29 @@ void render_frame(void) {
         for (float x = -WIDTH; x < WIDTH; x += SPEED) {
             // Y coordinate
             for (float y = -HEIGHT; y < HEIGHT; y += SPEED) {
-                // Z coordinate
-                for (float z = -DEPTH; z < DEPTH; z += SPEED) {
-                    float preeval = x * cosA + y * sinA;
+                // rotation calculations
+                float rx = x*cosA;
+                float ry = y*cosA + x*sinA*sinA;
+                float rz = -y*sinA + x*cosA*sinA + OBJECT_DISTANCE;
+                float z_inv = 1.0f / rz;
 
-                    // rotation calculations
-                    float rx = -z * sinA + cosA * preeval;
-                    float ry = y * cosA - x * sinA;
-                    float rz = (z * cosA + sinA * preeval) + CAMERA_DISTANCE;
-                    float z_inv = 1.0f / rz;
+                // projections
+                int x_projection = (int) (SCREEN_WIDTH / 2) + rx * FOV * z_inv * STRETCH;
+                int y_projection = (int) (SCREEN_HEIGHT / 2) - ry * FOV * z_inv;
 
-                    // projections
-                    int x_projection = (int) (SCREEN_WIDTH / 2) + rx * FOV * z_inv;
-                    int y_projection = (int) (SCREEN_HEIGHT / 2) - ry * FOV * z_inv;
-
-                    int index = x_projection + y_projection * SCREEN_WIDTH;
+                int index = x_projection + y_projection * SCREEN_WIDTH;
+                if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
                     if (z_inv > z_buffer[index]) {
                         z_buffer[index] = z_inv;
+
                         out_buffer[index] = '#';
-                    }   
+                    }
                 }
             }
         }
         
         printf("\x1b[H");   // move cursor to top left
-        
+
         // print output
         for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
             if (i % SCREEN_WIDTH == 0) putchar('\n');
