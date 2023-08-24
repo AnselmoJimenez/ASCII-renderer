@@ -2,8 +2,13 @@ CC=gcc
 CFLAGS=-c -Wall -I. -fpic -g -fbounds-check
 LIBS=-lm
 
-main:	
-	$(CC) cube.c -o cube $(LIBS)
+OBJS=render.o cube.o
+
+%.o:	%.c %.h
+	$(CC) $(CFLAGS) $< -o $@
+
+render:	$(OBJS) 
+	$(CC) -o $@ $^ $(LIBS)
 
 clean:
-	rm -f cube
+	rm -f $(OBJS) render
