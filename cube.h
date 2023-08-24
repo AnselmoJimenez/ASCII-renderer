@@ -1,10 +1,8 @@
 #ifndef CUBE_H_
 #define CUBE_H_
 
-#include <stdbool.h>
-
-#define SPEED 0.05f
-#define INCREMENT 0.05f
+#define SPEED 0.02f
+#define INCREMENT 0.5f
 
 // cube type to track data of each cube
 typedef struct {
@@ -14,8 +12,10 @@ typedef struct {
     int x;
     int y; 
     int z;
-    bool rotation;
 } cube_t;
+
+// determine the character to display based off of the face being rendered
+char determine_char(cube_t *cube, float cx, float cy, float cz)
 
 // Render a frame of the cube
 void render_cube_frame(cube_t *cube, float *z, char *out);
