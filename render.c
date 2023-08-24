@@ -20,7 +20,7 @@ void render() {
         memset(out, '.', SCREEN_HEIGHT * SCREEN_WIDTH);
         
         // render
-        render_cube_frame(z, out, cube);
+        render_cube_frame(cube, z, out);
 
         // move cursor to top left of screen and print output
         printf("\x1b[H");

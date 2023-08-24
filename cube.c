@@ -4,17 +4,18 @@
 // angle of rotation
 static float A = 0;
 
-void render_cube_frame(float *z, char *out, cube_t *cube) {
+// calculate and assign character to each face of the cube
+float calculate_face(float cx, float cy, float cz, char character);
+
+// render the cube
+void render_cube_frame(cube_t *cube, float *z, char *out) {
     float cosA = cos(A);
     float sinA = sin(A);
 
-    (void) cosA;
-    (void) sinA;
-
     // X coordinate
-    for (float cx = -cube->width; cx < cube->width; cx += INCREMENT) {
+    for (float cy = -cube->height; cy < cube->height; cy += INCREMENT) {
         // Y coordinate
-        for (float cy = -cube->height; cy < cube->height; cy += INCREMENT) {
+        for (float cx = -cube->width; cx < cube->width; cx += INCREMENT) {
             // rotation calculations
             float rx = cx*cosA;
             float ry = cy*cosA + cx*sinA*sinA;

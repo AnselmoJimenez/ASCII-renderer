@@ -18,6 +18,6 @@ typedef struct {
 } cube_t;
 
 // Render a frame of the cube
-void render_cube_frame(float *z, char *out, cube_t *cube);
+void render_cube_frame(cube_t *cube, float *z, char *out);
 
 #endif
