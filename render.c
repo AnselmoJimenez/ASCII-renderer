@@ -10,14 +10,14 @@ void render() {
     printf("\x1b[2J");
 
     cube_t *cube = (cube_t *) calloc(1, sizeof(cube_t));
-    cube->width = 20.0f;
-    cube->height = 20.0f;
-    cube->depth = 20.0f;
-    cube->x = 5;
-    cube->y = 5;
-    cube->z = 5;
+    cube->width = 10;
+    cube->height = 10;
+    cube->depth = 10;
+    cube->x = 0;
+    cube->y = 0;
+    cube->z = 0;
 
-    while (true) {
+    for (;;) {
         // reset coordinate buffer and output buffer
         memset(z, 0.0f, sizeof(z));
         memset(out, ' ', SCREEN_HEIGHT * SCREEN_WIDTH);
@@ -32,11 +32,11 @@ void render() {
             putchar((int) out[i]);
         }
         putchar('\n');
-
     }
 }
 
 int main(void) {
     render(z, out);
+
     return 0;
 }
