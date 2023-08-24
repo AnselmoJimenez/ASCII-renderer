@@ -1,26 +1,23 @@
 #ifndef CUBE_H_
 #define CUBE_H_
 
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <math.h>
+#include <stdbool.h>
 
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 50
+#define SPEED 0.05f
+#define INCREMENT 0.05f
 
-#define FOV 50.0f
+// cube type to track data of each cube
+typedef struct {
+    float width;
+    float height; 
+    float depth;
+    int x;
+    int y; 
+    int z;
+    bool rotation;
+} cube_t;
 
-#define SPEED 0.15f
-#define OBJECT_DISTANCE 100.0f
-
-#define HEIGHT 20.0f
-#define WIDTH 20.0f
-#define DEPTH 20.0f
-
-#define STRETCH 2
-
-// Render a frame of the donut
-void render_frame(void);
+// Render a frame of the cube
+void render_cube_frame(float *z, char *out, cube_t *cube);
 
 #endif

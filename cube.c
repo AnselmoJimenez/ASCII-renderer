@@ -1,63 +1,43 @@
+#include "render.h"
 #include "cube.h"
 
-void render_frame(void) {
-    float A = 0;
+// angle of rotation
+static float A = 0;
 
+void render_cube_frame(float *z, char *out, cube_t *cube) {
     float cosA = cos(A);
     float sinA = sin(A);
 
-    float z_buffer[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_WIDTH - 1] = 0.0f };
-    char out_buffer[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_WIDTH - 1] = ' ' };
+    (void) cosA;
+    (void) sinA;
 
-    for (;;) {
-        // reset contents of buffers
-        memset(z_buffer, 0.0f, sizeof(z_buffer));
-        memset(out_buffer, ' ', sizeof(out_buffer));
+    // X coordinate
+    for (float cx = -cube->width; cx < cube->width; cx += INCREMENT) {
+        // Y coordinate
+        for (float cy = -cube->height; cy < cube->height; cy += INCREMENT) {
+            // rotation calculations
+            float rx = cx*cosA;
+            float ry = cy*cosA + cx*sinA*sinA;
+            float rz = -cy*sinA + cx*cosA*sinA + OBJECT_DISTANCE;
+            float z_inv = 1.0f / rz;
 
-        // X coordinate
-        for (float x = -WIDTH; x < WIDTH; x += SPEED) {
-            // Y coordinate
-            for (float y = -HEIGHT; y < HEIGHT; y += SPEED) {
-                // rotation calculations
-                float rx = x*cosA;
-                float ry = y*cosA + x*sinA*sinA;
-                float rz = -y*sinA + x*cosA*sinA + OBJECT_DISTANCE;
-                float z_inv = 1.0f / rz;
+            // projections
+            int x_projection = (int) (SCREEN_WIDTH / 2) + rx * FOV * z_inv * STRETCH;
+            int y_projection = (int) (SCREEN_HEIGHT / 2) - ry * FOV * z_inv;
 
-                // projections
-                int x_projection = (int) (SCREEN_WIDTH / 2) + rx * FOV * z_inv * STRETCH;
-                int y_projection = (int) (SCREEN_HEIGHT / 2) - ry * FOV * z_inv;
+            // Get the index of the projection on the screen
+            int index = x_projection + y_projection * SCREEN_WIDTH;
+            
+            // If we're inside the range of the screen...
+            if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
+                if (z_inv > z[index]) {
+                    z[index] = z_inv;
 
-                int index = x_projection + y_projection * SCREEN_WIDTH;
-                if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
-                    if (z_inv > z_buffer[index]) {
-                        z_buffer[index] = z_inv;
-
-                        out_buffer[index] = '#';
-                    }
+                    out[index] = '#';
                 }
             }
         }
-        
-        printf("\x1b[H");   // move cursor to top left
-
-        // print output
-        for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++) {
-            if (i % SCREEN_WIDTH == 0) putchar('\n');
-            putchar((int) out_buffer[i]);
-        }
-        putchar('\n');
-
-        A += 0.05;
-
-        cosA = cos(A);
-        sinA = sin(A);
     }
-}
 
-int main(void) {
-    printf("\x1b[2J");  // Clear screen
-    render_frame();
-
-    return 0;
+    A += SPEED;
 }
