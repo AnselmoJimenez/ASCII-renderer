@@ -13,6 +13,9 @@ void render() {
     cube->width = 20.0f;
     cube->height = 20.0f;
     cube->depth = 20.0f;
+    cube->x = 5;
+    cube->y = 5;
+    cube->z = 5;
 
     while (true) {
         // reset coordinate buffer and output buffer
