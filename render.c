@@ -17,7 +17,7 @@ void render() {
     while (true) {
         // reset coordinate buffer and output buffer
         memset(z, 0.0f, sizeof(z));
-        memset(out, '.', SCREEN_HEIGHT * SCREEN_WIDTH);
+        memset(out, ' ', SCREEN_HEIGHT * SCREEN_WIDTH);
         
         // render
         render_cube_frame(cube, z, out);
