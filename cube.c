@@ -2,8 +2,8 @@
 #include "cube.h"
 
 // determine the character to display based off of the face being rendered
-char determine_char(cube_t *cube, float cx, float cy, float cz) {
-    if (cz == -cube->depth)         return '@'; // front face
+char determine_char(cube_t *cube, int cx, int cy, int cz) {
+    if      (cz == -cube->depth)    return '@'; // front face
     else if (cy == -cube->height)   return '%'; // top face
     else if (cx == -cube->width)    return '$'; // right face
     else if (cz == cube->depth)     return '.'; // back face
@@ -45,7 +45,7 @@ void render_cube_frame(cube_t *cube, float *z, char *out) {
                 if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
                     if (z_inv > z[index]) {
                         z[index] = z_inv;
-                        out[index] = determine_char(cube, cx, cy, cz);
+                        out[index] = determine_char(cube, (int) roundf(cx), (int) roundf(cy), (int) roundf(cz));
                     }
                 }
             }
