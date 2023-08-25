@@ -1,8 +1,8 @@
 #ifndef CUBE_H_
 #define CUBE_H_
 
-#define SPEED 0.02f
-#define INCREMENT 0.3f
+#define SPEED 0.05f
+#define INCREMENT 0.7f
 
 // cube type to track data of each cube
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     int x;
     int y; 
     int z;
-    rotation_t axis_rotation;
+    rotation_t *rotation;
 } cube_t;
 
 // determine the character to display based off of the face being rendered
