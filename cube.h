@@ -1,7 +1,6 @@
 #ifndef CUBE_H_
 #define CUBE_H_
 
-#define SPEED 0.05f
 #define INCREMENT 0.7f
 
 // cube type to track data of each cube
