@@ -1,4 +1,6 @@
 #include "render.h"
+#include "rotation.h"
+
 #include "cube.h"
 
 static float z[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_WIDTH - 1] = 0.0f };
@@ -16,6 +18,7 @@ void render() {
     cube->x = 0;
     cube->y = 0;
     cube->z = 0;
+    cube->axis_rotation = XY;
 
     for (;;) {
         // reset coordinate buffer and output buffer
