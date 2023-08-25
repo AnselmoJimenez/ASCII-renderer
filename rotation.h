@@ -3,8 +3,6 @@
 
 #include <math.h>
 
-#define SPEED 0.02f
-
 // Rotation type to decide how to rotate coordinates
 typedef enum {
     NONE,
@@ -15,15 +13,22 @@ typedef enum {
     XZ,
     YZ,
     XYZ,
+} axis_t;
+
+// rotation structure to track rotation information for each polygon
+typedef struct {
+    axis_t axis;
+    float rotation_speed;
+    float angle;
 } rotation_t;
 
-// rotate the given x coordinate by angle degrees around the axis specified
-void rotate_x(float *x, rotation_t axis, float angle);
+// rotate the x coordinate around the axis specified by an angle
+float rotate_x(float x, float y, float z, rotation_t *rotation);
 
-// rotate the given y coordinate by angle degrees around the axis specified
-void rotate_y(float *y, rotation_t axis, float angle);
+// rotate the y coordinate around the axis specified by an angle
+float rotate_y(float x, float y, float z, rotation_t *rotation);
 
-// rotate the given z coordinate by angle degrees around the axis specified
-void rotate_z(float *z, rotation_t axis, float angle);
+// rotate the z coordinate around the axis specified by an angle
+float rotate_z(float x, float y, float z, rotation_t *rotation);
 
 #endif
