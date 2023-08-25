@@ -18,7 +18,29 @@ void render() {
     cube->x = 0;
     cube->y = 0;
     cube->z = 0;
-    cube->axis_rotation = XY;
+
+    rotation_t *cube_rot = (rotation_t *) calloc(1, sizeof(rotation_t));
+    cube->rotation = cube_rot;
+
+    cube_rot->axis = XY;
+    cube_rot->rotation_speed = 0.02f;
+    cube_rot->angle = 0.0f;
+
+    cube_t *cube1 = (cube_t *) calloc(1, sizeof(cube_t));
+    cube1->width = 10;
+    cube1->height = 10;
+    cube1->depth = 10;
+    cube1->x = 20;
+    cube1->y = 20;
+    cube1->z = 20;
+
+    rotation_t *cube1_rot = (rotation_t *) calloc(1, sizeof(rotation_t));
+    cube1->rotation = cube1_rot;
+
+    cube1_rot->axis = YZ;
+    cube1_rot->rotation_speed = 0.05f;
+    cube1_rot->angle = 0.0f;
+
 
     for (;;) {
         // reset coordinate buffer and output buffer
@@ -27,6 +49,7 @@ void render() {
         
         // render
         render_cube_frame(cube, z, out);
+        render_cube_frame(cube1, z, out);
 
         // move cursor to top left of screen and print output
         printf("\x1b[H");
