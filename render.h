@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <math.h>
 
 #define SCREEN_WIDTH 156
 #define SCREEN_HEIGHT 48
