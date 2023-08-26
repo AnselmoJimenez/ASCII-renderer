@@ -2,7 +2,7 @@
 #include "sphere.h"
 
 // determine the character to display based off of the lumination
-char determine_lumination(sphere_t *sphere, float sx, float sy, float sz) {
+char determine_sphere_lumination(sphere_t *sphere, float sx, float sy, float sz) {
     // lighting direction
     int lx = 0;
     int ly = 1;
@@ -22,10 +22,10 @@ char determine_lumination(sphere_t *sphere, float sx, float sy, float sz) {
 // Render a frame of the sphere
 void render_sphere_frame(sphere_t *sphere, float *z, char *out) {
     // Theta angle between point at sphere surface and z plane
-    for (float theta = 0.0f; theta < PI; theta += THETA_INCREMENT) {
+    for (float theta = 0.0f; theta < PI; theta += ANGLE_INCREMENT) {
         float cosT = cos(theta), sinT = sin(theta);
         // Phi angle between xy plane and positive x axis
-        for (float phi = 0.0f; phi < 2 * PI; phi += PHI_INCREMENT) {
+        for (float phi = 0.0f; phi < 2 * PI; phi += ANGLE_INCREMENT) {
             float cosP = cos(phi), sinP = sin(phi);
 
             // calculating surface coordinates
@@ -45,7 +45,7 @@ void render_sphere_frame(sphere_t *sphere, float *z, char *out) {
             if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
                 if (z_inv > z[index]) {
                     z[index] = z_inv;
-                    out[index] = determine_lumination(sphere, sx, sy, sz);
+                    out[index] = determine_sphere_lumination(sphere, sx, sy, sz);
                 }
             }
         }
