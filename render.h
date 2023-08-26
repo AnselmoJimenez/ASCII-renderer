@@ -15,4 +15,6 @@
 #define OBJECT_DISTANCE 100.0f
 #define STRETCH 2
 
+#define PI 3.141592
+
 #endif
