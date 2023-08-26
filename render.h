@@ -10,7 +10,7 @@
 #define SCREEN_WIDTH 156
 #define SCREEN_HEIGHT 48
 
-#define FOV 50.0f
+#define FOV 100.0f
 
 #define OBJECT_DISTANCE 100.0f
 #define STRETCH 2
