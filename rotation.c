@@ -1,3 +1,4 @@
+#include "render.h"
 #include "rotation.h"
 
 // rotate the x coordinate around the axis specified by an angle

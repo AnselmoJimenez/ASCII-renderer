@@ -1,8 +1,6 @@
 #ifndef ROTATION_H_
 #define ROTATION_H_
 
-#include <math.h>
-
 // Rotation type to decide how to rotate coordinates
 typedef enum {
     NONE,
