@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-c -Wall -I. -fpic -g -fbounds-check
 LIBS=-lm
 
-OBJS=render.o rotation.o cube.o
+OBJS=render.o rotation.o cube.o sphere.o
 
 %.o:	%.c %.h
 	$(CC) $(CFLAGS) $< -o $@
