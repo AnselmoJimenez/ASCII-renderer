@@ -15,6 +15,9 @@
 #define OBJECT_DISTANCE 100.0f
 #define STRETCH 2
 
+#define COORD_INCREMENT 0.45f
+#define ANGLE_INCREMENT 0.05f
+
 #define PI 3.141592
 
 #endif
