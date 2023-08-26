@@ -1,8 +1,6 @@
 #ifndef CUBE_H_
 #define CUBE_H_
 
-#define INCREMENT 0.7f
-
 // cube type to track data of each cube
 typedef struct {
     int width;
@@ -15,7 +13,7 @@ typedef struct {
 } cube_t;
 
 // determine the character to display based off of the face being rendered
-char determine_char(cube_t *cube, int cx, int cy, int cz);
+char determine_cube_char(cube_t *cube, int cx, int cy, int cz);
 
 // Render a frame of the cube
 void render_cube_frame(cube_t *cube, float *z, char *out);

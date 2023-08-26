@@ -4,7 +4,7 @@
 #include "cube.h"
 
 // determine the character to display based off of the face being rendered
-char determine_char(cube_t *cube, int cx, int cy, int cz) {
+char determine_cube_char(cube_t *cube, int cx, int cy, int cz) {
     if      (cz == -cube->depth)    return '@'; // front face
     else if (cy == -cube->height)   return '%'; // top face
     else if (cx == -cube->width)    return '$'; // right face
@@ -19,11 +19,11 @@ char determine_char(cube_t *cube, int cx, int cy, int cz) {
 // render the cube
 void render_cube_frame(cube_t *cube, float *z, char *out) {
     // Z Coordinate
-    for (float cz = -cube->depth; cz <= cube->depth; cz += INCREMENT) {
+    for (float cz = -cube->depth; cz <= cube->depth; cz += COORD_INCREMENT) {
         // Y Coordinate 
-        for (float cy = -cube->height; cy <= cube->height; cy += INCREMENT) {
+        for (float cy = -cube->height; cy <= cube->height; cy += COORD_INCREMENT) {
             // X Coordinate
-            for (float cx = -cube->width; cx <= cube->width; cx += INCREMENT) {
+            for (float cx = -cube->width; cx <= cube->width; cx += COORD_INCREMENT) {
                 // rotation calculations for coordinates
                 float rx = rotate_x(cx, cy, cz, cube->rotation) + cube->x; 
                 float ry = rotate_y(cx, cy, cz, cube->rotation) + cube->y; 
@@ -42,7 +42,7 @@ void render_cube_frame(cube_t *cube, float *z, char *out) {
                 if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
                     if (z_inv > z[index]) {
                         z[index] = z_inv;
-                        out[index] = determine_char(cube, (int) roundf(cx), (int) roundf(cy), (int) roundf(cz));
+                        out[index] = determine_cube_char(cube, (int) roundf(cx), (int) roundf(cy), (int) roundf(cz));
                     }
                 }
             }
