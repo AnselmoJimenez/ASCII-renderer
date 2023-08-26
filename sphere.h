@@ -4,8 +4,6 @@
 #define THETA_INCREMENT 0.01f
 #define PHI_INCREMENT 0.01f
 
-#define PI 3.141592
-
 typedef struct {
     int r;      // radius of sphere
     int x;
