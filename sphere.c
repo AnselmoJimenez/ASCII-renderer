@@ -2,7 +2,22 @@
 #include "sphere.h"
 
 // determine the character to display based off of the lumination
-char determine_char(sphere_t *sphere, int theta, int phi);
+char determine_lumination(sphere_t *sphere, float sx, float sy, float sz) {
+    // lighting direction
+    int lx = 0;
+    int ly = 1;
+    int lz = -1;
+    
+    // surface normal vector
+    float nx = (sx + sphere->x) / sphere->r;
+    float ny = (sy + sphere->y) / sphere->r;
+    float nz = (sz + sphere->z) / sphere->r;
+
+    // lumination intensity based on surface normal and lighting direction
+    // negated for indexing purposes
+    int luminance = (int) -(nx*lx + ny*ly + nz*lz);
+    return "@$#?!:~-,.`"[luminance];
+}
 
 // Render a frame of the sphere
 void render_sphere_frame(sphere_t *sphere, float *z, char *out) {
@@ -30,7 +45,7 @@ void render_sphere_frame(sphere_t *sphere, float *z, char *out) {
             if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
                 if (z_inv > z[index]) {
                     z[index] = z_inv;
-                    out[index] = '@';
+                    out[index] = determine_lumination(sphere, sx, sy, sz);
                 }
             }
         }
