@@ -16,7 +16,7 @@ char determine_sphere_lumination(sphere_t *sphere, float sx, float sy, float sz)
     // lumination intensity based on surface normal and lighting direction
     // negated for indexing purposes
     int luminance = (int) -(nx*lx + ny*ly + nz*lz);
-    return "@$#?!:~-,.`"[luminance];
+    return "@$#?!:+~,.`"[luminance];
 }
 
 // Render a frame of the sphere
