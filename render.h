@@ -6,6 +6,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <math.h>
+#include <ctype.h>
 
 #define SCREEN_WIDTH 156
 #define SCREEN_HEIGHT 48
@@ -20,7 +21,18 @@
 
 #define PI 3.141592
 
-#define ARGUMENTS "s:"
+#define ARGUMENTS "s:h"
+#define USAGE                                   \
+    "USAGE: render [-h] [-s shape] \n"          \
+    "\n"                                        \
+    "where:\n"                                  \
+    "   -h  -  help (display this message)\n"   \
+    "   -s [shape]  -  renders shape\n"         \
+    "      shape options: cube\n"               \
+    "                     sphere\n"             \
+    "                     cone\n"               \
+    "                     cylinder\n"           \
+    "\n"                                        \
 
 typedef enum {
     CUBE,
