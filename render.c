@@ -10,7 +10,7 @@ static float z[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_W
 static char out[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_WIDTH - 1] = ' ' };
 
 
-void render() {
+void render(shape_t shape) {
     // clear screen
     printf("\x1b[2J");
 
@@ -73,10 +73,10 @@ void render() {
         memset(out, ' ', SCREEN_HEIGHT * SCREEN_WIDTH);
         
         // render
-        render_cube_frame(cube, z, out);
-        render_cone_frame(cone, z, out);
-        render_cylinder_frame(cylinder, z, out);
-        render_sphere_frame(sphere, z, out);
+        // render_cube_frame(cube, z, out);
+        // render_cone_frame(cone, z, out);
+        // render_cylinder_frame(cylinder, z, out);
+        // render_sphere_frame(sphere, z, out);
 
         // move cursor to top left of screen and print output
         printf("\x1b[H");
@@ -88,8 +88,18 @@ void render() {
     }
 }
 
-int main(void) {
-    render(z, out);
+int main(int argc, char *argv[]) {
+    int opt;
+
+    while((opt = getopt(argc, argv, ARGUMENTS)) != -1) {
+        switch(opt) {
+            case 's':
+                printf("option: %s\n", optarg);
+                break;
+        }
+    }
+
+    // render(z, out);
 
     return 0;
 }

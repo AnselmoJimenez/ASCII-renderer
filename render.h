@@ -20,4 +20,13 @@
 
 #define PI 3.141592
 
+#define ARGUMENTS "s:"
+
+typedef enum {
+    CUBE,
+    SPHERE,
+    CONE,
+    CYLINDER,
+} shape_t;
+
 #endif
