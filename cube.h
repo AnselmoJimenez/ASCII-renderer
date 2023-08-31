@@ -6,10 +6,6 @@ typedef struct {
     int width;
     int height; 
     int depth;
-    int x;
-    int y; 
-    int z;
-    rotation_t *rotation;
 } cube_t;
 
 // determine the character to display based off of the face being rendered

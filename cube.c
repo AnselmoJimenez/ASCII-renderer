@@ -1,5 +1,4 @@
 #include "render.h"
-#include "rotation.h"
 
 #include "cube.h"
 
@@ -18,6 +17,9 @@ char determine_cube_char(cube_t *cube, int cx, int cy, int cz) {
 
 // render the cube
 void render_cube_frame(cube_t *cube, float *z, char *out) {
+    // preevaluate the values of cos(A) and sin(A)
+    float cosA = cos(angle), sinA = sin(angle);
+
     // Z Coordinate
     for (float cz = -cube->depth; cz <= cube->depth; cz += COORD_INCREMENT) {
         // Y Coordinate 
@@ -25,9 +27,9 @@ void render_cube_frame(cube_t *cube, float *z, char *out) {
             // X Coordinate
             for (float cx = -cube->width; cx <= cube->width; cx += COORD_INCREMENT) {
                 // rotation calculations for coordinates
-                float rx = rotate_x(cx, cy, cz, cube->rotation) + cube->x; 
-                float ry = rotate_y(cx, cy, cz, cube->rotation) + cube->y; 
-                float rz = rotate_z(cx, cy, cz, cube->rotation) + OBJECT_DISTANCE + cube->z; 
+                float rx = cx*cosA + cy*sinA;
+                float ry = cz*sinA + cy*cosA*cosA - cx*sinA*cosA;
+                float rz = cz*cosA - cy*cosA*sinA - cx*sinA*sinA + OBJECT_DISTANCE;
 
                 float z_inv = 1.0f / rz;
 
@@ -48,6 +50,4 @@ void render_cube_frame(cube_t *cube, float *z, char *out) {
             }
         }
     }
-    // increment rotation
-    cube->rotation->angle += cube->rotation->rotation_speed;
 }
