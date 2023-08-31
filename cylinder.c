@@ -13,6 +13,9 @@ char determine_cylinder_char(cylinder_t *cylinder, int cz) {
 
 // Render a frame of the cylinder
 void render_cylinder_frame(cylinder_t *cylinder, float *z, char *out) {
+    // preevaluate sin and cosine values for angles
+    float cosA = cos(angle), sinA = sin(angle);
+
     // Z Coordinate
     for (float cz = -cylinder->l; cz <= cylinder->l; cz += COORD_INCREMENT) {
         // Y Coordinate
@@ -23,9 +26,9 @@ void render_cylinder_frame(cylinder_t *cylinder, float *z, char *out) {
                 float d = sqrt(cx*cx + cy*cy);
 
                 // rotation calculations for coordinates
-                float rx = rotate_x(cx, cy, cz, cylinder->rotation) + cylinder->x; 
-                float ry = rotate_y(cx, cy, cz, cylinder->rotation) + cylinder->y; 
-                float rz = rotate_z(cx, cy, cz, cylinder->rotation) + OBJECT_DISTANCE + cylinder->z; 
+                float rx = cx*cosA*cosA + cy*cosA*sinA - cz*cosA*sinA + cy*cosA*sinA*sinA - cx*sinA*sinA*sinA;
+                float ry = cz*sinA + cy*cosA*cosA - cx*cosA*sinA;
+                float rz = cx*cosA*sinA + cy*sinA*sinA + cz*cosA*cosA - cy*cosA*cosA*sinA + cx*cosA*sinA*sinA + OBJECT_DISTANCE; 
 
                 float z_inv = 1.0f / rz;
 
@@ -48,7 +51,4 @@ void render_cylinder_frame(cylinder_t *cylinder, float *z, char *out) {
             }
         }
     }
-    
-    // increment rotation
-    cylinder->rotation->angle += cylinder->rotation->rotation_speed;
 }

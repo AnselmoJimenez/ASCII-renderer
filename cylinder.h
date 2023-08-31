@@ -2,12 +2,8 @@
 #define CYLINDER_H_
 
 typedef struct {
-    float r;    // radius
-    float l;    // length of the cylinder
-    int x;
-    int y;
-    int z;      // offsets
-    rotation_t *rotation;
+    int r;    // radius
+    int l;    // length of the cylinder
 } cylinder_t;
 
 // Determines the character to put on the cylinder
