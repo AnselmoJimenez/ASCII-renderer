@@ -3,12 +3,8 @@
 
 // cone type to track data of each cone
 typedef struct {
-    int r;  // first radius
+    float r;  // first radius
     int l;  // length of cone
-    int x;
-    int y; 
-    int z;  // offsets
-    rotation_t *rotation;
 } cone_t;
 
 // determine the character to display based off of the face being rendered

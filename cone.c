@@ -5,14 +5,21 @@
 
 // Determines the character to put on the cone
 char determine_cone_char(cone_t *cone, int cz) {
-    if (cz == 0) return '@'; // bottom face
+    if (cz == -cone->l) return '@'; // bottom face
     return '%';
 }
 
 // Render a frame of the cone
 void render_cone_frame(cone_t *cone, float *z, char *out) {
+    // preevaluate sin and cosine values for angles
+    float cosA = cos(angle), sinA = sin(angle);
+
+    // radius trackers as we iterate through the z axis
+    float r_decrement = cone->r / (4*cone->l);
+    int l_pos = 0;
+
     // Z Coordinate
-    for (float cz = 0; cz < cone->l; cz += COORD_INCREMENT) {
+    for (float cz = -cone->l; cz < cone->l; cz += COORD_INCREMENT) {
         // Y Coordinate
         for (float cy = -cone->r; cy < cone->r; cy += COORD_INCREMENT) {
             // X Coordinate
@@ -21,18 +28,18 @@ void render_cone_frame(cone_t *cone, float *z, char *out) {
                 float d = sqrt(cx*cx + cy*cy);
 
                 // rotation calculations for coordinates
-                float rx = rotate_x(cx, cy, cz, cone->rotation) + cone->x; 
-                float ry = rotate_y(cx, cy, cz, cone->rotation) + cone->y; 
-                float rz = rotate_z(cx, cy, cz, cone->rotation) + OBJECT_DISTANCE + cone->z; 
+                float rx = cx*cosA*cosA + cy*cosA*sinA - cz*cosA*sinA + cy*cosA*sinA*sinA - cx*sinA*sinA*sinA;
+                float ry = cz*sinA + cy*cosA*cosA - cx*cosA*sinA;
+                float rz = cx*cosA*sinA + cy*sinA*sinA + cz*cosA*cosA - cy*cosA*cosA*sinA + cx*cosA*sinA*sinA + OBJECT_DISTANCE; 
 
                 float z_inv = 1.0f / rz;
-
-                if (d <= cone->r - cz) {
+                
+                if (d <= cone->r - (r_decrement * l_pos)) {
                     // projections
                     int x_projection = (int) (SCREEN_WIDTH / 2) + rx * FOV * z_inv * STRETCH;
                     int y_projection = (int) (SCREEN_HEIGHT / 2) - ry * FOV * z_inv;
 
-                    // Get the index of the projection on the screen
+                    // Ge>t the index of the projection on the screen
                     int index = x_projection + y_projection * SCREEN_WIDTH;
                     
                     // If we're inside the range of the screen...
@@ -45,8 +52,6 @@ void render_cone_frame(cone_t *cone, float *z, char *out) {
                 }
             }
         }
+        l_pos++;
     }
-    
-    // increment rotation
-    cone->rotation->angle += cone->rotation->rotation_speed;
 }
