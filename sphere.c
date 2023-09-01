@@ -9,14 +9,14 @@ char determine_sphere_lumination(sphere_t *sphere, float sx, float sy, float sz)
     int lz = -1;
     
     // surface normal vector
-    float nx = (sx + sphere->x) / sphere->r;
-    float ny = (sy + sphere->y) / sphere->r;
-    float nz = (sz + sphere->z) / sphere->r;
+    float nx = sx / sphere->r;
+    float ny = sy / sphere->r;
+    float nz = sz / sphere->r;
 
     // lumination intensity based on surface normal and lighting direction
     // negated for indexing purposes
     int luminance = (int) -(nx*lx + ny*ly + nz*lz);
-    return "@$#?!:+~,.`"[luminance];
+    return "0$#?!/:+~,."[luminance];
 }
 
 // Render a frame of the sphere
@@ -29,9 +29,10 @@ void render_sphere_frame(sphere_t *sphere, float *z, char *out) {
             float cosP = cos(phi), sinP = sin(phi);
 
             // calculating surface coordinates
-            float sx = (sphere->r * sinT * cosP) + sphere->x;
-            float sy = (sphere->r * sinT * sinP) + sphere->y;
-            float sz = (sphere->r * cosT) + OBJECT_DISTANCE + sphere->z;
+            float sx = sphere->r * sinT * cosP;
+            float sy = sphere->r * sinT * sinP;
+            float sz = sphere->r * cosT + OBJECT_DISTANCE;
+
             float z_inv = 1.0f / sz;
 
             // calculating projection onto screen
