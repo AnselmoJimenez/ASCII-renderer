@@ -21,7 +21,7 @@
 
 #define PI 3.141592
 
-#define ARGUMENTS "s:h"
+#define ARGUMENTS "hs:r:"
 #define USAGE                                   \
     "USAGE: render [-h] [-s shape] \n"          \
     "\n"                                        \
@@ -33,6 +33,8 @@
     "                     cone\n"               \
     "                     cylinder\n"           \
     "\n"                                        \
+
+extern float angle;
 
 typedef enum {
     CUBE,
