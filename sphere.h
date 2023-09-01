@@ -3,9 +3,6 @@
 
 typedef struct {
     int r;      // radius of sphere
-    int x;
-    int y;
-    int z;      // x, y, and z offsets
 } sphere_t;
 
 // determine the character to display based off of the lumination
