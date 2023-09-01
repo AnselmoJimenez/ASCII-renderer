@@ -11,7 +11,7 @@ static char out[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_
 
 float angle = 0.0f;
 
-void render(shape_t shape, axis_t axis) {
+void render(shape_t shape) {
     // clear screen
     printf("\x1b[2J");
 
@@ -129,7 +129,8 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    render(shape, X);
+    // render
+    render(shape);
 
     return 0;
 }

@@ -21,7 +21,7 @@
 
 #define PI 3.141592
 
-#define ARGUMENTS "hs:r:"
+#define ARGUMENTS "hs:"
 #define USAGE                                   \
     "USAGE: render [-h] [-s shape] \n"          \
     "\n"                                        \
