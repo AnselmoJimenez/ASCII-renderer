@@ -8,10 +8,10 @@ typedef struct {
     int depth;
 } cube_t;
 
-// determine the character to display based off of the face being rendered
-char determine_cube_char(cube_t *cube, int cx, int cy, int cz);
+// Rotate the coordinates on XYZ and put the cooresponding character
+void rotate_surface(float rx, float ry, float rz, char c, float *z_buf, char *out_buf);
 
-// Render a frame of the cube
-void render_cube_frame(cube_t *cube, float *z, char *out);
+// render a single frame of the cube at the current angle
+void render_cube_frame(cube_t *cube, float *z_buf, char *out_buf);
 
 #endif
