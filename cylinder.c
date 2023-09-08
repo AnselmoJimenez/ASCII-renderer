@@ -43,7 +43,7 @@ void render_cylinder_frame(cylinder_t *cylinder, float *z, char *out) {
                     if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
                         if (z_inv > z[index]) {
                             z[index] = z_inv;
-                            out[index] = determine_cylinder_char(cylinder, (int) roundf(cz));
+                            out[index] = determine_cylinder_char(cylinder, (int) cz);
                         }
                     }
                 }
