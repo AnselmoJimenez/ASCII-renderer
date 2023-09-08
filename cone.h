@@ -7,9 +7,6 @@ typedef struct {
     int l;  // length of cone
 } cone_t;
 
-// determine the character to display based off of the face being rendered
-char determine_cone_char(cone_t *cone, int cz);
-
 // Render a frame of the cone
 void render_cone_frame(cone_t *cone, float *z, char *out);
 

@@ -2,20 +2,14 @@
 
 #include "cone.h"
 
-// Determines the character to put on the cone
-char determine_cone_char(cone_t *cone, int cz) {
-    if (cz == -cone->l) return '@'; // bottom face
-    return '%';
-}
-
 // Render a frame of the cone
 void render_cone_frame(cone_t *cone, float *z, char *out) {
     // preevaluate sin and cosine values for angles
     float cosA = cos(angle), sinA = sin(angle);
 
-    // radius trackers as we iterate through the z axis
-    float r_decrement = cone->r / (4*cone->l);
-    int l_pos = 0;
+    // radius and position tracker as we iterate through the z axis
+    float l_pos = 2 * cone->l;
+    float radius = cone->r;
 
     // Z Coordinate
     for (float cz = -cone->l; cz < cone->l; cz += COORD_INCREMENT) {
@@ -33,7 +27,7 @@ void render_cone_frame(cone_t *cone, float *z, char *out) {
 
                 float z_inv = 1.0f / rz;
                 
-                if (d <= cone->r - (r_decrement * l_pos)) {
+                if (d < radius) {
                     // projections
                     int x_projection = (int) (SCREEN_WIDTH / 2) + rx * FOV * z_inv * STRETCH;
                     int y_projection = (int) (SCREEN_HEIGHT / 2) - ry * FOV * z_inv;
@@ -45,12 +39,13 @@ void render_cone_frame(cone_t *cone, float *z, char *out) {
                     if (-1 < index && index < SCREEN_HEIGHT * SCREEN_WIDTH) {
                         if (z_inv > z[index]) {
                             z[index] = z_inv;
-                            out[index] = determine_cone_char(cone, (int) roundf(cz));
+                            out[index] = cz == -cone->l ? '%' : '|';
                         }
                     }
                 }
             }
         }
-        l_pos++;
+        l_pos -= COORD_INCREMENT;
+        radius = (cone->r * l_pos) / (2 * cone->l);
     }
 }
