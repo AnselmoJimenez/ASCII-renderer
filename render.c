@@ -4,6 +4,7 @@
 #include "cube.h"
 #include "cylinder.h"
 #include "cone.h"
+#include "pyramid.h"
 
 static float z[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_WIDTH - 1] = 0.0f };
 static char out[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_WIDTH - 1] = ' ' };
@@ -14,32 +15,6 @@ void render(shape_t shape) {
     // clear screen
     printf("\x1b[2J");
 
-    /* cube ****************************************************************/
-    cube_t *cube = (cube_t *) calloc(1, sizeof(cube_t));
-    cube->width = 10;
-    cube->height = 10;
-    cube->depth = 10;
-    /***********************************************************************/
-
-
-    /* sphere **************************************************************/
-    sphere_t *sphere = (sphere_t *) calloc(1, sizeof(sphere_t));
-    sphere->r = 10;
-    /***********************************************************************/
-
-
-    /* Cylinder ************************************************************/
-    cylinder_t *cylinder = (cylinder_t *) calloc(1, sizeof(sphere_t));
-    cylinder->r = 10;
-    cylinder->l = 10;
-    /***********************************************************************/
-
-    /* cone ****************************************************************/
-    cone_t *cone = (cone_t *) calloc(1, sizeof(cone_t));
-    cone->r = 10.0f;
-    cone->l = 10;
-    /***********************************************************************/
-
     for (;;) {
         // reset coordinate buffer and output buffer
         memset(z, 0.0f, sizeof(z));
@@ -48,20 +23,48 @@ void render(shape_t shape) {
         // render
         switch (shape) {
             case CUBE:
+                cube_t *cube = (cube_t *) calloc(1, sizeof(cube_t));
+                cube->width = 3;
+                cube->height = 3;
+                cube->depth = 3;
+
                 render_cube_frame(cube, z, out);
-                break;
+            break;
+
             case SPHERE:
+                sphere_t *sphere = (sphere_t *) calloc(1, sizeof(sphere_t));
+                sphere->r = 3;
+
                 render_sphere_frame(sphere, z, out);
-                break;
+            break;
+
             case CONE:
+                cone_t *cone = (cone_t *) calloc(1, sizeof(cone_t));
+                cone->r = 3.0f;
+                cone->l = 4;
+
                 render_cone_frame(cone, z, out);
-                break;
+            break;
+
             case CYLINDER:
+                cylinder_t *cylinder = (cylinder_t *) calloc(1, sizeof(sphere_t));
+                cylinder->r = 3;
+                cylinder->l = 3;
+
                 render_cylinder_frame(cylinder, z, out);
-                break;
+            break;
+
+            case PYRAMID:
+                pyramid_t *pyramid = (pyramid_t *) calloc(1, sizeof(pyramid_t));
+                pyramid->height = 3;
+                pyramid->width = 3;
+                pyramid->depth = 3;
+
+                render_pyramid_frame(pyramid, z, out);
+            break;
         }
 
-        angle += 0.02f;
+        angle += 0.01f;
 
         // move cursor to top left of screen and print output
         printf("\x1b[H");
@@ -90,6 +93,7 @@ shape_t enumify(const char *shape) {
     else if (strcmp(temp, "SPHERE") == 0) return SPHERE;
     else if (strcmp(temp, "CONE") == 0) return CONE;
     else if (strcmp(temp, "CYLINDER") == 0) return CYLINDER;
+    else if (strcmp(temp, "PYRAMID") == 0) return PYRAMID;
     
     // undefined shape
     return -1;

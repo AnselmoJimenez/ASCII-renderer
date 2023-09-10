@@ -8,15 +8,15 @@
 #include <math.h>
 #include <ctype.h>
 
-#define SCREEN_WIDTH 156
-#define SCREEN_HEIGHT 48
+#define SCREEN_WIDTH 256
+#define SCREEN_HEIGHT 64
 
 #define FOV 100.0f
 
-#define OBJECT_DISTANCE 100.0f
+#define OBJECT_DISTANCE 25.0f
 #define STRETCH 2
 
-#define COORD_INCREMENT 0.45f
+#define COORD_INCREMENT 0.1f
 #define ANGLE_INCREMENT 0.05f
 
 #define PI 3.141592
@@ -41,6 +41,7 @@ typedef enum {
     SPHERE,
     CONE,
     CYLINDER,
+    PYRAMID,
 } shape_t;
 
 #endif
