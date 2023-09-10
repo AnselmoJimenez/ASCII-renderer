@@ -37,3 +37,4 @@ Currently, the ASCII Renderer supports the following 3D shapes:
 * Cylinder
 * Cone
 * Sphere
+* Pyramids
