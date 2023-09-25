@@ -64,7 +64,7 @@ void render(shape_t shape) {
             break;
         }
 
-        angle += 0.01f;
+        angle += ROTATION_SPEED;
 
         // move cursor to top left of screen and print output
         printf("\x1b[H");

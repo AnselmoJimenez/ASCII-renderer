@@ -26,10 +26,10 @@ void render_sphere_frame(sphere_t *sphere, float *z, char *out) {
     float cosA = cos(angle), sinA = sin(angle);
 
     // Theta angle between point at sphere surface and z plane
-    for (float theta = 0.0f; theta < PI; theta += THETA_INCREMENT) {
+    for (float theta = 0.0f; theta < PI; theta += ANGLE_INCREMENT) {
         float cosT = cos(theta), sinT = sin(theta);
         // Phi angle between xy plane and positive x axis
-        for (float phi = 0.0f; phi < 2 * PI; phi += PHI_INCREMENT) {
+        for (float phi = 0.0f; phi < 2 * PI; phi += ANGLE_INCREMENT) {
             float cosP = cos(phi), sinP = sin(phi);
 
             // calculating surface coordinates

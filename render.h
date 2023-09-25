@@ -17,11 +17,13 @@
 #define STRETCH 2
 
 #define COORD_INCREMENT 0.1f
-#define ANGLE_INCREMENT 0.05f
+#define ANGLE_INCREMENT 0.01f
+
+#define ROTATION_SPEED 0.01f;
 
 #define PI 3.141592
 
-#define ARGUMENTS "hs:"
+#define ARGUMENTS "hs:i:"
 #define USAGE                                   \
     "USAGE: render [-h] [-s shape] \n"          \
     "\n"                                        \
