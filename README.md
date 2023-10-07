@@ -1,9 +1,9 @@
 # ASCII-Renderer
 
-<video width="320" height="240" controls>
-  <source src="Spinning Cube.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+> [!WARNING]
+> This software is unfinished. Keep your expectations low.
+
+[![Watch the video](https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4)](https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4)
 
 ## Contents
 - [Overview](#Overview)
