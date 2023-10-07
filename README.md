@@ -1,9 +1,13 @@
 # ASCII-Renderer
 
-> [!WARNING]
+> [!]
 > This software is unfinished. Keep your expectations low.
 
-<div align="center"> [![Spinning Cube](spinning-cube.png)](https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4) </div>
+<p align="center">
+  <a href="https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4">
+    <img src="spinning-cube.png" alt="Spinning Cube" width="200" />
+  </a>
+</p>
 
 ## Contents
 - [Overview](#Overview)
