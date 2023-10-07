@@ -3,7 +3,7 @@
 > [!WARNING]
 > This software is unfinished. Keep your expectations low.
 
-[![Spinning Cube](spinning-cube.png)](https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4)
+<div align="center"> [![Spinning Cube](spinning-cube.png)](https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4) </div>
 
 ## Contents
 - [Overview](#Overview)
