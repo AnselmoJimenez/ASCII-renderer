@@ -1,7 +1,6 @@
 # ASCII-Renderer
 
-> [!]
-> This software is unfinished. Keep your expectations low.
+> This project is unfinished.
 
 <p align="center">
   <a href="https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4">
