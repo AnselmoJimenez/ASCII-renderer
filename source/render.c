@@ -10,8 +10,15 @@ static float z[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_W
 static char out[SCREEN_HEIGHT * SCREEN_WIDTH] = { [0 ... SCREEN_HEIGHT * SCREEN_WIDTH - 1] = ' ' };
 
 float angle = 0.0f;
+float object_distance = 25.0f;
 
+// Render a Shape
 void render(shape_t shape) {
+    initscr();              // initializing ncurses
+    cbreak();               // Line buffering disabled
+    keypad(stdscr, TRUE);   // Enable special keys
+    noecho();               // Dont print inputs
+
     // clear screen
     printf("\x1b[2J");
 
@@ -29,6 +36,8 @@ void render(shape_t shape) {
                 cube->depth = 3;
 
                 render_cube_frame(cube, z, out);
+                cube = NULL;
+                free(cube);
             break;
 
             case SPHERE:
@@ -36,6 +45,8 @@ void render(shape_t shape) {
                 sphere->r = 3;
 
                 render_sphere_frame(sphere, z, out);
+                sphere = NULL;
+                free(sphere);
             break;
 
             case CONE:
@@ -44,6 +55,8 @@ void render(shape_t shape) {
                 cone->l = 4;
 
                 render_cone_frame(cone, z, out);
+                cone = NULL;
+                free(cone);
             break;
 
             case CYLINDER:
@@ -52,6 +65,8 @@ void render(shape_t shape) {
                 cylinder->l = 3;
 
                 render_cylinder_frame(cylinder, z, out);
+                cylinder = NULL;
+                free(cylinder);
             break;
 
             case PYRAMID:
@@ -61,10 +76,22 @@ void render(shape_t shape) {
                 pyramid->depth = 3;
 
                 render_pyramid_frame(pyramid, z, out);
+                pyramid = NULL;
+                free(pyramid);
             break;
         }
-
-        angle += ROTATION_SPEED;
+        
+        // keyboard handling
+        int input = getch();
+        switch (input) {
+            case KEY_RIGHT:
+                angle += 0.01f;
+            break;
+            case KEY_LEFT:
+                angle -= 0.01f;
+            break;
+        }
+        // angle += ROTATION_SPEED;
 
         // move cursor to top left of screen and print output
         printf("\x1b[H");
@@ -76,7 +103,7 @@ void render(shape_t shape) {
     }
 }
 
-// take shape argument from terminal and convert to enum
+// Translate the shape entered in terminal to enum type
 shape_t enumify(const char *shape) {
     char temp[strlen(shape) + 1];
 
@@ -89,11 +116,11 @@ shape_t enumify(const char *shape) {
     temp[i] = '\0';
 
     // return enum of option
-    if (strcmp(temp, "CUBE") == 0) return CUBE;
-    else if (strcmp(temp, "SPHERE") == 0) return SPHERE;
-    else if (strcmp(temp, "CONE") == 0) return CONE;
+    if      (strcmp(temp, "CUBE")     == 0) return CUBE;
+    else if (strcmp(temp, "SPHERE")   == 0) return SPHERE;
+    else if (strcmp(temp, "CONE")     == 0) return CONE;
     else if (strcmp(temp, "CYLINDER") == 0) return CYLINDER;
-    else if (strcmp(temp, "PYRAMID") == 0) return PYRAMID;
+    else if (strcmp(temp, "PYRAMID")  == 0) return PYRAMID;
     
     // undefined shape
     return -1;
