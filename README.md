@@ -1,12 +1,12 @@
 # ASCII-Renderer
 
-> This project is unfinished.
-
 <p align="center">
   <a href="https://github.com/AnselmoJimenez/ASCII-renderer/blob/main/Spinning%20Cube.mp4">
-    <img src="spinning-cube.png" alt="Spinning Cube" width="200" />
+    <img src="spinning-cube.png" alt="Spinning Cube" width="512" />
   </a>
 </p>
+
+> This project is unfinished
 
 ## Contents
 - [Overview](#Overview)

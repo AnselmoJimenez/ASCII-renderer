@@ -1,14 +1,29 @@
-CC=gcc
-CFLAGS=-c -Wall -I. -fpic -g -fbounds-check
+# Compiler and compiler flags
+CC = gcc
+CFLAGS =-Wall -I./include -fpic -g -fbounds-check
 LIBS=-lm
 
-OBJS=render.o cube.o sphere.o cylinder.o cone.o pyramid.o
+# Directories
+SRC_DIR = source
+BUILD_DIR = build
 
-%.o:	%.c %.h
-	$(CC) $(CFLAGS) $< -o $@
+# List of source files and object files
+SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
-render:	$(OBJS) 
+# Executable name
+TARGET = render
+
+all: $(BUILD_DIR) $(TARGET)
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+$(TARGET): $(OBJ_FILES)
 	$(CC) -o $@ $^ $(LIBS)
 
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(OBJS) render
+	rm -rf $(BUILD_DIR) $(TARGET)
