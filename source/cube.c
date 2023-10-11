@@ -10,7 +10,7 @@ void rotate_surface(float rx, float ry, float rz, char c, float *z_buf, char *ou
     // XYZ rotations
     float x = rx*cosA*cosA + ry*cosA*sinA - rz*cosA*sinA + ry*cosA*sinA*sinA - rx*sinA*sinA*sinA;
     float y = rz*sinA + ry*cosA*cosA - rx*cosA*sinA;
-    float z = rx*cosA*sinA + ry*sinA*sinA + rz*cosA*cosA - ry*cosA*cosA*sinA + rx*cosA*sinA*sinA + OBJECT_DISTANCE;
+    float z = rx*cosA*sinA + ry*sinA*sinA + rz*cosA*cosA - ry*cosA*cosA*sinA + rx*cosA*sinA*sinA + object_distance;
 
     float z_inv = 1.0f / z;
 
