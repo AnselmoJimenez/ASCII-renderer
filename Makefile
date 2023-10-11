@@ -1,7 +1,7 @@
 # Compiler and compiler flags
 CC = gcc
 CFLAGS =-Wall -I./include -fpic -g -fbounds-check
-LIBS=-lm
+LIBS=-lm -lncurses
 
 # Directories
 SRC_DIR = source
@@ -12,7 +12,7 @@ SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
 # Executable name
-TARGET = render
+TARGET = ascii-renderer
 
 all: $(BUILD_DIR) $(TARGET)
 
