@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <math.h>
 #include <ctype.h>
+#include <ncurses.h>
 
 #define SCREEN_WIDTH 256
 #define SCREEN_HEIGHT 64
@@ -37,6 +38,7 @@
     "\n"                                        \
 
 extern float angle;
+extern float object_distance;
 
 typedef enum {
     CUBE,
@@ -45,5 +47,11 @@ typedef enum {
     CYLINDER,
     PYRAMID,
 } shape_t;
+
+// Render a shape
+void render(shape_t shape);
+
+// Translate the shape entered in terminal to enum type
+shape_t enumify(const char *shape);
 
 #endif
